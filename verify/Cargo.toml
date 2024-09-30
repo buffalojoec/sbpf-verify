@@ -1,0 +1,11 @@
+[package]
+name = "solana-sbpf-verify"
+version = "0.1.0"
+authors.workspace = true
+repository.workspace = true
+license.workspace = true
+edition.workspace = true
+
+[dependencies]
+solana-program = { workspace = true }
+spl-program-error = { workspace = true }

@@ -1,0 +1,27 @@
+[package]
+name = "solana-sbpf-verify-program"
+version = "0.1.0"
+authors.workspace = true
+repository.workspace = true
+license.workspace = true
+edition.workspace = true
+
+[lib]
+crate-type = ["cdylib", "lib"]
+
+[dependencies]
+num-traits = { workspace = true }
+solana-sbpf-verify = { path = "../verify" }
+solana-program = { workspace = true }
+thiserror = { workspace = true }
+
+[dev-dependencies]
+mollusk-svm = { workspace = true }
+solana-sdk = { workspace = true }
+
+[features]
+bpf-entrypoint = []
+test-sbf = []
+
+[package.metadata.solana]
+program-id = "SBPFVerify1111111111111111111111111111111111"
