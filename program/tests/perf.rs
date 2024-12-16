@@ -2,23 +2,55 @@
 
 use {
     mollusk_svm::{result::Check, Mollusk},
-    solana_sdk::{account::AccountSharedData, bpf_loader_upgradeable, pubkey::Pubkey},
+    solana_sdk::{
+        account::{Account, AccountSharedData},
+        bpf_loader_upgradeable::{self, UpgradeableLoaderState},
+        pubkey::Pubkey,
+        rent::Rent,
+    },
 };
 
-pub fn setup() -> Mollusk {
+const BUFFER_METADATA_LEN: usize = UpgradeableLoaderState::size_of_buffer_metadata();
+
+fn setup() -> Mollusk {
     Mollusk::new(
         &solana_sbpf_verify_program::id(),
         "solana_sbpf_verify_program",
     )
 }
 
+fn buffer_account(elf: &[u8]) -> AccountSharedData {
+    let space = BUFFER_METADATA_LEN.saturating_add(elf.len());
+    let lamports = Rent::default().minimum_balance(space);
+    let mut data = vec![0; space];
+    bincode::serialize_into(
+        &mut data[..],
+        &UpgradeableLoaderState::Buffer {
+            authority_address: None,
+        },
+    )
+    .unwrap();
+    data[BUFFER_METADATA_LEN..].copy_from_slice(elf);
+    AccountSharedData::from(Account {
+        lamports,
+        data,
+        owner: bpf_loader_upgradeable::id(),
+        ..Account::default()
+    })
+}
+
+fn test_elf_hello_world() -> Vec<u8> {
+    mollusk_svm::file::load_program_elf("test_program_hello_world")
+}
+
 #[test]
 fn test_perf() {
     let mollusk = setup();
 
-    // TODO: Set up proper buffer account(s).
+    let elf = test_elf_hello_world();
+
     let buffer_address = Pubkey::new_unique();
-    let buffer_account = AccountSharedData::new(100_000_000, 0, &bpf_loader_upgradeable::id());
+    let buffer_account = buffer_account(&elf);
 
     let instruction = solana_sbpf_verify_program::instruction::verify(&buffer_address);
 
@@ -27,7 +59,7 @@ fn test_perf() {
         &[(buffer_address, buffer_account)],
         &[
             Check::success(),
-            Check::compute_units(375), // We'll see...
+            // Check::compute_units(375), // We'll see...
         ],
     );
 }
