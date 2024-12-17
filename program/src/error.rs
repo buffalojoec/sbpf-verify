@@ -6,7 +6,7 @@ use {
         decode_error::DecodeError,
         program_error::{PrintProgramError, ProgramError},
     },
-    solana_sbpf_verify::VerifyError,
+    solana_sbpf_verify::error::VerifyError,
     thiserror::Error,
 };
 
