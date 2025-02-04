@@ -2086,6 +2086,8 @@ checksum = "6ea1a2d0a644769cc99faa24c3ad26b379b786fe7c36fd3c546254801650e6dd"
 name = "sbpf-verify"
 version = "0.1.0"
 dependencies = [
+ "bincode",
+ "getrandom 0.2.15",
  "mollusk-svm",
  "num-derive 0.3.3",
  "num-traits",
@@ -2098,6 +2100,8 @@ dependencies = [
  "solana-program-entrypoint",
  "solana-program-error",
  "solana-pubkey",
+ "solana-rent",
+ "solana-sbpf",
  "thiserror",
 ]
 
@@ -2873,6 +2877,23 @@ name = "solana-sanitize"
 version = "2.1.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e956e49e563eb8a9aa09425d676180a0a0509038be4457f230bb6e1dfa036053"
+
+[[package]]
+name = "solana-sbpf"
+version = "0.10.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "66a3ce7a0f4d6830124ceb2c263c36d1ee39444ec70146eb49b939e557e72b96"
+dependencies = [
+ "byteorder",
+ "combine",
+ "hash32",
+ "libc",
+ "log",
+ "rand 0.8.5",
+ "rustc-demangle",
+ "thiserror",
+ "winapi",
+]
 
 [[package]]
 name = "solana-sdk"

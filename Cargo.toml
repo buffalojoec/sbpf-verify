@@ -10,6 +10,8 @@ program-id = "SBPFVerify111111111111111111111111111111111"
 crate-type = ["cdylib", "lib"]
 
 [dependencies]
+bincode = "1.3.3"
+getrandom = { version = "0.2.15", features = ["custom"] }
 num-derive = "0.3"
 num-traits = "0.2"
 solana-account-info = "2.1"
@@ -20,11 +22,13 @@ solana-package-metadata = "2.1"
 solana-program-entrypoint = "2.1"
 solana-program-error = "2.1"
 solana-pubkey = "2.1"
+solana-sbpf = "0.10.0"
 thiserror = "1.0"
 
 [dev-dependencies]
 mollusk-svm = "0.0.15"
 solana-account = "2.1"
+solana-rent = "2.1"
 
 [features]
 bpf-entrypoint = []
