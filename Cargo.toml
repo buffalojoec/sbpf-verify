@@ -1,0 +1,37 @@
+[package]
+name = "sbpf-verify"
+version = "0.1.0"
+edition = "2021"
+
+[package.metadata.solana]
+program-id = "SBPFVerify111111111111111111111111111111111"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+
+[dependencies]
+num-derive = "0.3"
+num-traits = "0.2"
+solana-account-info = "2.1"
+solana-decode-error = "2.1"
+solana-instruction = "2.1"
+solana-msg = "2.1"
+solana-package-metadata = "2.1"
+solana-program-entrypoint = "2.1"
+solana-program-error = "2.1"
+solana-pubkey = "2.1"
+thiserror = "1.0"
+
+[dev-dependencies]
+mollusk-svm = "0.0.15"
+solana-account = "2.1"
+
+[features]
+bpf-entrypoint = []
+test-sbf = []
+
+[lints.rust.unexpected_cfgs]
+level = "warn"
+check-cfg = [
+    'cfg(target_os, values("solana"))',
+]
