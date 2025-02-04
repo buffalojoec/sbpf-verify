@@ -1,6 +1,7 @@
 //! Possible ELF verification errors.
 
 use {
+    crate::ebpf,
     num_derive::FromPrimitive,
     solana_program::{
         decode_error::DecodeError,
@@ -12,9 +13,12 @@ use {
 /// Possible ELF verification errors.
 #[derive(Debug, Error, FromPrimitive)]
 pub enum VerifyError {
-    /// This is a placeholder error.
-    #[error("This is a placeholder error.")]
-    Placeholder,
+    /// ProgramLengthNotMultiple
+    #[error("Program length must be a multiple of {} octets", ebpf::INSN_SIZE)]
+    ProgramLengthNotMultiple,
+    /// NoProgram
+    #[error("No program provided")]
+    NoProgram,
 }
 
 impl From<VerifyError> for ProgramError {
@@ -39,9 +43,13 @@ impl PrintProgramError for VerifyError {
             + num_traits::FromPrimitive,
     {
         match self {
-            VerifyError::Placeholder => {
-                println!("This is a placeholder error.");
+            VerifyError::ProgramLengthNotMultiple => {
+                solana_program::msg!(
+                    "Program length must be a multiple of {} octets",
+                    ebpf::INSN_SIZE
+                )
             }
+            VerifyError::NoProgram => solana_program::msg!("No program provided"),
         }
     }
 }

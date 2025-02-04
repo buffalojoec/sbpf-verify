@@ -2329,6 +2329,8 @@ dependencies = [
 name = "solana-sbpf-verify"
 version = "0.1.0"
 dependencies = [
+ "byteorder",
+ "hash32",
  "num-derive",
  "num-traits",
  "solana-program",
