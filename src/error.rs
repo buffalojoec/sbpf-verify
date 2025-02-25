@@ -1,4 +1,5 @@
 //! Program error types.
+#![allow(non_local_definitions)]
 
 use {
     num_derive::FromPrimitive,
