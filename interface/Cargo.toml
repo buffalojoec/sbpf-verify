@@ -1,0 +1,16 @@
+[package]
+name = "sbpf-verify-interface"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+num-derive = { workspace = true }
+num-traits = { workspace = true }
+solana-decode-error = { workspace = true }
+solana-msg = { workspace = true }
+solana-program-error = { workspace = true }
+solana-pubkey = { workspace = true }
+thiserror = { workspace = true }
+
+[lints]
+workspace = true

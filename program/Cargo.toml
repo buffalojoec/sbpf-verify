@@ -6,22 +6,20 @@ edition = "2021"
 [dependencies]
 bincode = { workspace = true }
 getrandom = { workspace = true }
-num-derive = { workspace = true }
-num-traits = { workspace = true }
+sbpf-verify-interface = { workspace = true }
 solana-account-info = { workspace = true }
-solana-decode-error = { workspace = true }
-solana-instruction = { workspace = true }
 solana-msg = { workspace = true }
 solana-package-metadata = { workspace = true }
 solana-program-entrypoint = { workspace = true }
 solana-program-error = { workspace = true }
 solana-pubkey = { workspace = true }
 solana-sbpf = { workspace = true }
-thiserror = { workspace = true }
 
 [dev-dependencies]
 mollusk-svm = { workspace = true }
+sbpf-verify-client = { workspace = true }
 solana-account = { workspace = true }
+solana-instruction = { workspace = true }
 solana-rent = { workspace = true }
 
 [features]
@@ -36,6 +34,3 @@ workspace = true
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
-
-[package.metadata.solana]
-program-id = "SBPFVerify111111111111111111111111111111111"

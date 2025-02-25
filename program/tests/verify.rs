@@ -3,7 +3,7 @@
 mod setup;
 
 use {
-    mollusk_svm::result::Check, sbpf_verify::instruction::verify, solana_account::Account,
+    mollusk_svm::result::Check, sbpf_verify_client::instruction::verify, solana_account::Account,
     solana_instruction::error::InstructionError, solana_pubkey::Pubkey,
 };
 

@@ -1,10 +1,6 @@
 //! Program instructions.
 
-use {
-    solana_instruction::{AccountMeta, Instruction},
-    solana_program_error::ProgramError,
-    solana_pubkey::Pubkey,
-};
+use solana_program_error::ProgramError;
 
 /// Instructions supported by the SBPF Verify program.
 #[derive(Debug, PartialEq)]
@@ -49,13 +45,6 @@ impl SBPFVerifyInstruction {
             _ => Err(ProgramError::InvalidInstructionData),
         }
     }
-}
-
-/// Creates a [Verify](enum.SBPFVerifyInstruction.html) instruction.
-pub fn verify(buffer_address: &Pubkey, elf_offset: u64) -> Instruction {
-    let accounts = vec![AccountMeta::new(*buffer_address, false)];
-    let data = SBPFVerifyInstruction::Verify { elf_offset }.pack();
-    Instruction::new_with_bytes(crate::id(), &data, accounts)
 }
 
 #[cfg(test)]

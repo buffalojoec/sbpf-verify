@@ -10,5 +10,5 @@ pub const SPL_NOOP_ELF: &[u8] = include_bytes!("./fixtures/spl_noop.so");
 pub const SPL_TOKEN_ELF: &[u8] = include_bytes!("./fixtures/spl_token.so");
 
 pub fn setup() -> Mollusk {
-    Mollusk::new(&sbpf_verify::id(), "sbpf_verify")
+    Mollusk::new(&sbpf_verify_interface::id(), "sbpf_verify")
 }

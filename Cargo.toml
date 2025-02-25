@@ -1,5 +1,9 @@
 [workspace]
-members = ["program"]
+members = [
+    "client",
+    "interface",
+    "program",
+]
 resolver = "2"
 
 [workspace.dependencies]
@@ -8,6 +12,9 @@ getrandom = { version = "0.2.15", features = ["custom"] }
 mollusk-svm = "0.1.0"
 num-derive = "0.3"
 num-traits = "0.2"
+sbpf-verify = { path = "program", version = "0.1.0" }
+sbpf-verify-client = { path = "client", version = "0.1.0" }
+sbpf-verify-interface = { path = "interface", version = "0.1.0" }
 solana-account = "2.2"
 solana-account-info = "2.2"
 solana-decode-error = "2.2"

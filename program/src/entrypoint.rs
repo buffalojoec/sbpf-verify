@@ -1,7 +1,8 @@
 //! Program entrypoint.
 
 use {
-    crate::{error::SBPFVerifyError, processor},
+    crate::processor,
+    sbpf_verify_interface::error::SBPFVerifyError,
     solana_account_info::AccountInfo,
     solana_program_error::{PrintProgramError, ProgramResult},
     solana_pubkey::Pubkey,

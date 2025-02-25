@@ -1,0 +1,12 @@
+[package]
+name = "sbpf-verify-client"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+sbpf-verify-interface = { workspace = true }
+solana-instruction = { workspace = true }
+solana-pubkey = { workspace = true }
+
+[lints]
+workspace = true

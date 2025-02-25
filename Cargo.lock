@@ -1846,11 +1846,10 @@ dependencies = [
  "bincode",
  "getrandom 0.2.15",
  "mollusk-svm",
- "num-derive",
- "num-traits",
+ "sbpf-verify-client",
+ "sbpf-verify-interface",
  "solana-account",
  "solana-account-info",
- "solana-decode-error",
  "solana-instruction",
  "solana-msg",
  "solana-package-metadata",
@@ -1859,6 +1858,27 @@ dependencies = [
  "solana-pubkey",
  "solana-rent",
  "solana-sbpf",
+]
+
+[[package]]
+name = "sbpf-verify-client"
+version = "0.1.0"
+dependencies = [
+ "sbpf-verify-interface",
+ "solana-instruction",
+ "solana-pubkey",
+]
+
+[[package]]
+name = "sbpf-verify-interface"
+version = "0.1.0"
+dependencies = [
+ "num-derive",
+ "num-traits",
+ "solana-decode-error",
+ "solana-msg",
+ "solana-program-error",
+ "solana-pubkey",
  "thiserror 1.0.69",
 ]
 

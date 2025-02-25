@@ -1,7 +1,7 @@
 //! Program processor.
 
 use {
-    crate::instruction::SBPFVerifyInstruction,
+    sbpf_verify_interface::instruction::SBPFVerifyInstruction,
     solana_account_info::AccountInfo,
     solana_msg::msg,
     solana_program_error::{ProgramError, ProgramResult},
