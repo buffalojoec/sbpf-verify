@@ -1,9 +1,13 @@
 //! Program instructions.
 
-use solana_program_error::ProgramError;
+use {
+    bytemuck::{Pod, Zeroable},
+    solana_program_error::ProgramError,
+};
 
 /// Instructions supported by the SBPF Verify program.
-#[derive(Debug, PartialEq)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+#[repr(C)]
 pub enum SBPFVerifyInstruction {
     /// Verify a program ELF.
     ///
@@ -20,30 +24,21 @@ pub enum SBPFVerifyInstruction {
     },
 }
 
+unsafe impl Pod for SBPFVerifyInstruction {}
+unsafe impl Zeroable for SBPFVerifyInstruction {}
+
 impl SBPFVerifyInstruction {
-    /// Packs a [SBPFVerifyInstruction](enum.SBPFVerifyInstruction.html) into a
-    /// buffer.
-    pub fn pack(&self) -> Vec<u8> {
-        match self {
-            SBPFVerifyInstruction::Verify { elf_offset } => {
-                let mut buf = Vec::with_capacity(9);
-                buf.push(0);
-                buf.extend_from_slice(&elf_offset.to_le_bytes());
-                buf
-            }
-        }
+    /// Interprets a
+    /// [SBPFVerifyInstruction](enum.SBPFVerifyInstruction.html) reference as
+    /// bytes.
+    pub fn bytes_of(&self) -> &[u8] {
+        bytemuck::bytes_of(self)
     }
 
-    /// Unpacks a buffer into a
-    /// [SBPFVerifyInstruction](enum.SBPFVerifyInstruction.html).
-    pub fn unpack(input: &[u8]) -> Result<Self, ProgramError> {
-        match input.split_first() {
-            Some((&0, rest)) if rest.len() == 8 => {
-                let elf_offset = u64::from_le_bytes(rest.try_into().unwrap());
-                Ok(SBPFVerifyInstruction::Verify { elf_offset })
-            }
-            _ => Err(ProgramError::InvalidInstructionData),
-        }
+    /// Interprets a buffer as a
+    /// [SBPFVerifyInstruction](enum.SBPFVerifyInstruction.html) reference.
+    pub fn interpret(data: &[u8]) -> Result<&Self, ProgramError> {
+        bytemuck::try_from_bytes(data).map_err(|_| ProgramError::InvalidInstructionData)
     }
 }
 
@@ -52,9 +47,9 @@ mod tests {
     use super::*;
 
     fn test_pack_unpack(instruction: SBPFVerifyInstruction) {
-        let packed = instruction.pack();
-        let unpacked = SBPFVerifyInstruction::unpack(&packed).unwrap();
-        assert_eq!(instruction, unpacked);
+        let packed = instruction.bytes_of();
+        let unpacked = SBPFVerifyInstruction::interpret(packed).unwrap();
+        assert_eq!(&instruction, unpacked);
     }
 
     #[test]

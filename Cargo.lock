@@ -1873,6 +1873,7 @@ dependencies = [
 name = "sbpf-verify-interface"
 version = "0.1.0"
 dependencies = [
+ "bytemuck",
  "num-derive",
  "num-traits",
  "solana-decode-error",

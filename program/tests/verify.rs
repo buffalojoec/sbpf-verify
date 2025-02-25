@@ -32,7 +32,7 @@ fn asm_noop() {
             // Success.
             // ASM Noop ELF size: 336
             Check::success(),
-            Check::compute_units(5_922), // <-- CUs used
+            Check::compute_units(5_931), // <-- CUs used
         ],
     );
 }

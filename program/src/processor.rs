@@ -78,10 +78,10 @@ fn process_verify(
 /// Processes a
 /// [SBPFVerifyInstruction](enum.SBPFVerifyInstruction.html).
 pub fn process(program_id: &Pubkey, accounts: &[AccountInfo], input: &[u8]) -> ProgramResult {
-    match SBPFVerifyInstruction::unpack(input)? {
+    match SBPFVerifyInstruction::interpret(input)? {
         SBPFVerifyInstruction::Verify { elf_offset } => {
             msg!("Instruction: Verify");
-            process_verify(program_id, accounts, elf_offset)
+            process_verify(program_id, accounts, *elf_offset)
         }
     }
 }
