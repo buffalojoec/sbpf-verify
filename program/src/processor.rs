@@ -1,11 +1,10 @@
 //! Program processor.
 
 use {
+    pinocchio::{
+        account_info::AccountInfo, msg, program_error::ProgramError, pubkey::Pubkey, ProgramResult,
+    },
     sbpf_verify_interface::instruction::SBPFVerifyInstruction,
-    solana_account_info::AccountInfo,
-    solana_msg::msg,
-    solana_program_error::{ProgramError, ProgramResult},
-    solana_pubkey::Pubkey,
     solana_sbpf::{elf::Executable, verifier::RequisiteVerifier},
 };
 

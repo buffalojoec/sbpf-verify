@@ -13,6 +13,8 @@ getrandom = { version = "0.2.15", features = ["custom"] }
 mollusk-svm = "0.1.0"
 num-derive = "0.3"
 num-traits = "0.2"
+pinocchio = "0.7.1"
+pinocchio-pubkey = "0.2.2"
 sbpf-verify = { path = "program", version = "0.1.0" }
 sbpf-verify-client = { path = "client", version = "0.1.0" }
 sbpf-verify-interface = { path = "interface", version = "0.1.0" }

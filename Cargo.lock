@@ -1571,6 +1571,22 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8b870d8c151b6f2fb93e84a13146138f05d02ed11c7e7c54f8826aaaf7c9f184"
 
 [[package]]
+name = "pinocchio"
+version = "0.7.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "43a8a77bf74e1c4050a2bad53648acfcfbf22b1806473f9c9334a58ef3b38ec4"
+
+[[package]]
+name = "pinocchio-pubkey"
+version = "0.2.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "103d69776a0c585bb01b344d641346593adb4496120796df229722a9bab2db68"
+dependencies = [
+ "five8_const",
+ "pinocchio",
+]
+
+[[package]]
 name = "pkg-config"
 version = "0.3.31"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1846,15 +1862,11 @@ dependencies = [
  "bincode",
  "getrandom 0.2.15",
  "mollusk-svm",
+ "pinocchio",
  "sbpf-verify-client",
  "sbpf-verify-interface",
  "solana-account",
- "solana-account-info",
  "solana-instruction",
- "solana-msg",
- "solana-package-metadata",
- "solana-program-entrypoint",
- "solana-program-error",
  "solana-pubkey",
  "solana-rent",
  "solana-sbpf",
@@ -1876,10 +1888,8 @@ dependencies = [
  "bytemuck",
  "num-derive",
  "num-traits",
- "solana-decode-error",
- "solana-msg",
- "solana-program-error",
- "solana-pubkey",
+ "pinocchio",
+ "pinocchio-pubkey",
  "thiserror 1.0.69",
 ]
 
@@ -1943,15 +1953,6 @@ dependencies = [
  "itoa",
  "memchr",
  "ryu",
- "serde",
-]
-
-[[package]]
-name = "serde_spanned"
-version = "0.6.8"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "87607cb1398ed59d48732e575a4c28a7a8ebf2454b964fe3f224f2afc07909e1"
-dependencies = [
  "serde",
 ]
 
@@ -2514,28 +2515,6 @@ dependencies = [
  "solana-hash",
  "solana-nonce",
  "solana-sdk-ids",
-]
-
-[[package]]
-name = "solana-package-metadata"
-version = "2.2.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2215face774c88e3f4f52845ff45246cebb311eccd650d3f5160b67c880fd43f"
-dependencies = [
- "solana-package-metadata-macro",
- "solana-pubkey",
-]
-
-[[package]]
-name = "solana-package-metadata-macro"
-version = "2.2.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "527939286f0c809ac78d9a69bf1e2cd6189f7e1d15468ba57d472833a7d7882c"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn 2.0.98",
- "toml",
 ]
 
 [[package]]
@@ -3191,40 +3170,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "toml"
-version = "0.8.20"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cd87a5cdd6ffab733b2f74bc4fd7ee5fff6634124999ac278c35fc78c6120148"
-dependencies = [
- "serde",
- "serde_spanned",
- "toml_datetime",
- "toml_edit",
-]
-
-[[package]]
-name = "toml_datetime"
-version = "0.6.8"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0dd7358ecb8fc2f8d014bf86f6f638ce72ba252a2c3a2572f2a795f1d23efb41"
-dependencies = [
- "serde",
-]
-
-[[package]]
-name = "toml_edit"
-version = "0.22.23"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "02a8b472d1a3d7c18e2d61a489aee3453fd9031c33e4f55bd533f4a7adca1bee"
-dependencies = [
- "indexmap",
- "serde",
- "serde_spanned",
- "toml_datetime",
- "winnow",
-]
-
-[[package]]
 name = "tower-service"
 version = "0.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3609,15 +3554,6 @@ name = "windows_x86_64_msvc"
 version = "0.52.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "589f6da84c646204747d1270a2a5661ea66ed1cced2631d546fdfb155959f9ec"
-
-[[package]]
-name = "winnow"
-version = "0.7.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "86e376c75f4f43f44db463cf729e0d3acbf954d13e22c51e26e4c264b4ab545f"
-dependencies = [
- "memchr",
-]
 
 [[package]]
 name = "winreg"

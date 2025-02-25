@@ -2,7 +2,7 @@
 
 use {
     bytemuck::{Pod, Zeroable},
-    solana_program_error::ProgramError,
+    pinocchio::program_error::ProgramError,
 };
 
 /// Instructions supported by the SBPF Verify program.
