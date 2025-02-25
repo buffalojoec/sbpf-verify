@@ -2,11 +2,11 @@
 
 use {
     crate::processor,
-    pinocchio::{account_info::AccountInfo, program_entrypoint, pubkey::Pubkey, ProgramResult},
+    pinocchio::{entrypoint::InstructionContext, lazy_program_entrypoint, ProgramResult},
 };
 
-program_entrypoint!(process);
+lazy_program_entrypoint!(process);
 
-fn process(program_id: &Pubkey, accounts: &[AccountInfo], input: &[u8]) -> ProgramResult {
-    processor::process(program_id, accounts, input)
+fn process(context: InstructionContext) -> ProgramResult {
+    processor::process(context)
 }

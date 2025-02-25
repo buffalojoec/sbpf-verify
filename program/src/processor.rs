@@ -2,7 +2,8 @@
 
 use {
     pinocchio::{
-        account_info::AccountInfo, msg, program_error::ProgramError, pubkey::Pubkey, ProgramResult,
+        account_info::AccountInfo, entrypoint::InstructionContext, msg,
+        program_error::ProgramError, ProgramResult,
     },
     sbpf_verify_interface::instruction::SBPFVerifyInstruction,
     solana_sbpf::{elf::Executable, verifier::RequisiteVerifier},
@@ -45,13 +46,7 @@ mod program_runtime_environment {
 }
 
 /// Processes a [Verify](enum.SBPFVerifyInstruction.html) instruction.
-fn process_verify(
-    _program_id: &Pubkey,
-    accounts: &[AccountInfo],
-    elf_offset: u64,
-) -> ProgramResult {
-    let buffer_info = accounts.first().ok_or(ProgramError::NotEnoughAccountKeys)?;
-
+fn process_verify(buffer_info: AccountInfo, elf_offset: u64) -> ProgramResult {
     let data = buffer_info.try_borrow_data()?;
     let elf = &data[elf_offset as usize..];
 
@@ -76,11 +71,18 @@ fn process_verify(
 
 /// Processes a
 /// [SBPFVerifyInstruction](enum.SBPFVerifyInstruction.html).
-pub fn process(program_id: &Pubkey, accounts: &[AccountInfo], input: &[u8]) -> ProgramResult {
+pub fn process(mut context: InstructionContext) -> ProgramResult {
+    // SAFETY: The buffer account should definitely be provided, and should not
+    // be duplicated at index 0.
+    let buffer_account = context.next_account()?.assume_account();
+
+    // SAFETY: All accounts required by the instruction have been read above.
+    let input = context.instruction_data()?;
+
     match SBPFVerifyInstruction::interpret(input)? {
         SBPFVerifyInstruction::Verify { elf_offset } => {
             msg!("Instruction: Verify");
-            process_verify(program_id, accounts, *elf_offset)
+            process_verify(buffer_account, *elf_offset)
         }
     }
 }
