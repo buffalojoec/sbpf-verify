@@ -32,7 +32,7 @@ fn asm_noop() {
             // Success.
             // ASM Noop ELF size: 336
             Check::success(),
-            Check::compute_units(5_824), // <-- CUs used
+            Check::compute_units(1_291), // <-- CUs used
         ],
     );
 }
@@ -48,9 +48,10 @@ fn spl_noop() {
         &verify(&buffer_address, /* elf_offset */ 8),
         &[(buffer_address, buffer_account)],
         &[
-            // Busts the program's heap.
+            // Success.
             // SPL Noop ELF size: 41_056
-            Check::instruction_err(InstructionError::ProgramFailedToComplete),
+            Check::success(),
+            Check::compute_units(186_272), // <-- CUs used
         ],
     );
 }

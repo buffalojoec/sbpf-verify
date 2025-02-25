@@ -10,7 +10,7 @@ resolver = "2"
 bincode = "1.3.3"
 bytemuck = "1.21.0"
 getrandom = { version = "0.2.15", features = ["custom"] }
-mollusk-svm = "0.1.0"
+mollusk-svm = "0.1.1"
 num-derive = "0.3"
 num-traits = "0.2"
 pinocchio = "0.7.1"
